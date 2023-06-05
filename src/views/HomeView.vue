@@ -1,18 +1,16 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <TODOHome :nameVal ="nameVal"/>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+  import TODOHome from '@/components/TODOHome.vue';
 
-export default {
-  name: 'HomeView',
-  components: {
-    HelloWorld
+  export default {
+    // eslint-disable-next-line vue/multi-word-component-names
+    name: 'Home',
+    components: {
+      TODOHome,
+    },
+    props: ['nameVal']
   }
-}
 </script>
