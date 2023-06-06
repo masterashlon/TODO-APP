@@ -1,9 +1,9 @@
 <template>
-  <TODOHome :nameVal ="nameVal"/>
+  <TODOHome />
 </template>
 
 <script>
-  import TODOHome from '@/components/TODOHome.vue';
+  import TODOHome from '@/components/TODOHome.vue'
 
   export default {
     // eslint-disable-next-line vue/multi-word-component-names
@@ -11,6 +11,5 @@
     components: {
       TODOHome,
     },
-    props: ['nameVal']
   }
 </script>

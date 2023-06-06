@@ -1,4 +1,5 @@
 <template>
+  
   <v-container
         fluid
         style="align-items: center"
@@ -8,23 +9,7 @@
           justify="center"
         >
       <v-col cols="5" class="text-center max-min-width-list">
-        <div
-          class="d-flex align-center"
-        >
-          <v-text-field
-            v-model="taskVal" 
-            :label="nameVal ? 'Task' : 'Error Login'"
-            :disabled="!nameVal"
-            hide-details="auto"
-            v-on:keydown.enter="addToList"
-          ></v-text-field>
-          <v-btn
-            v-on:click="addToList"
-          >
-          <v-icon>mdi-note-plus</v-icon>
-        </v-btn>
         
-      </div>
         <v-row
           class="mt-2 ml-1"
           justify="start"
@@ -60,7 +45,7 @@
         >
           <v-card
             v-bind:item="item"
-            v-for="(item, index) in reversedList"
+            v-for="(item, index) in reversedListIsCompleted"
             v-bind:key="item.id"
             class="c-flex justify-center align-center mb-10"
             :class="{completed: item.completed}"
@@ -129,7 +114,7 @@
               </v-btn>
               <v-btn
                 class="mb-1"
-                v-on:click="deleteTask(index)"
+                v-on:click="deleteTask(item.index)"
               >
               <v-icon
                 color="red darken-4"
@@ -146,63 +131,22 @@
       </v-col>
     </v-row>
   </v-container>
-
 </template>
 
 <script>
-  import utils from '../utils.js'
-  import { format } from 'date-fns'
-  import { v4 as uuidv4 } from 'uuid'
+import utils from '../utils.js'
+
 
   export default {
-    name: 'TODOHome',
+    // eslint-disable-next-line vue/multi-word-component-names
+    name: 'PageCompleted', 
     mixins: [utils],
+    computed: {
+      reversedListIsCompleted(){
+        return this.reversedList.filter(item => item.completed)
+      }
+    },
     data: () => ({
-      taskVal: "",
-      item: null,
-      }),
-
-      methods: {
-        addToList() {
-          const taskValue = this.taskVal.trim()
-          const currDate = new Date()
-          const formatDate = format(currDate, "dd MMM HH:mm")
-          if(taskValue) {
-            this.$store.dispatch(
-              "addTodoItem",
-            {
-              id: uuidv4(),
-              name: this.nameVal,
-              task: taskValue,
-              date: formatDate,
-              completed: false,
-              editing: false
-            })
-            this.taskVal = ""
-          }
-            
-        },
-      },
-      beforeMount() {
-      },
-    }
+    }),
+  }
 </script>
-
-<style>
-
-  .completed {
-    opacity: .75;
-  }
-  .lineThrough {
-    text-decoration: line-through;
-  }
-  .userColor {
-    color: hsl(188, 100%, 39%);
-  }
-  .max-min-width-list {
-    max-width: 900px;
-    width: 100%;
-    min-width: 330px;
-  }
-  
-</style>

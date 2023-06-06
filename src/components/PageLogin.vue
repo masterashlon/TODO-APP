@@ -6,13 +6,17 @@
     >
         <v-row align="center" justify="center">
         <v-col cols="5" class="text-center max-min-width">
-            <v-form>
+            <v-form
+                validate
+            >
                 <v-text-field
-                    v-model="nameVal" 
+                    v-model="nameLogin" 
                     label="Nome"
+                    class="text-h6"
                     hide-details="auto"
-                    validate-on-blur
+                    autofocus
                     required
+                    v-on:keydown.enter="login"
                 >
                 </v-text-field>
                 <v-spacer
@@ -34,28 +38,33 @@
 export default {
     // eslint-disable-next-line vue/multi-word-component-names
     name: 'PageLogin',
-
+    computed: {
+        nameVal() {
+            return this.$store.state.nameVal
+        },
+    },
     data: () => ({
-        nameVal: "",
+        nameLogin: "",
     }),
     methods: {
         login() {
-            if(!this.nameVal)
+            if(!this.nameLogin)
                 return
-            this.$router.push({
-                name: "home",
-                params: {
-                    nameVal: this.nameVal
-                }
-            });
-        }
+
+            this.$store.dispatch('updateUser', this.nameLogin)
+            this.$router.push("/home")
+        },
+    },
+    mounted() {
+      if(this.nameVal)
+        this.$router.push('/home')
     }
 }
 </script>
 
 <style scoped>
     .max-min-width {
-        max-width: 450px;
+        max-width: 400px;
         min-width: 250px;
     }
 </style>

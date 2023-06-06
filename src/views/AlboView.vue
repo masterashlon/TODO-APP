@@ -1,17 +1,17 @@
 
 <template>
-    <PageLogin/>
+    <PageAlbo/>
 </template>
   
   <script>
-    import PageLogin from '@/components/PageLogin.vue'
+    import PageAlbo from '@/components/PageAlbo.vue'
   
     export default {
         // eslint-disable-next-line vue/multi-word-component-names
-        name: 'Login',
+        name: 'Albo',
     
         components: {
-            PageLogin,
+            PageAlbo,
         },
     }
 </script>

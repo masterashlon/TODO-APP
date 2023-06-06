@@ -1,18 +1,18 @@
 <template>
-    <v-container
-        fluid
-        fill-height
-        style="align-items: center"
-    >
-      <h1>404 - Pagina non trovata</h1>
-      <p>La pagina che stai cercando non esiste.</p>
-      <router-link to="/">Torna alla pagina di login</router-link>
-    </v-container>
-  </template>
+  <Page404 />
+</template>
   
-  <script>
+<script>
+  import Page404 from '@/components/Page404.vue';
+
   export default {
-    name: 'NotFoundPage'
+    // eslint-disable-next-line vue/multi-word-component-names
+    name: 'NotFoundPage',
+
+    components: {
+      Page404,
+    }
   }
-  </script>
+  
+</script>
   

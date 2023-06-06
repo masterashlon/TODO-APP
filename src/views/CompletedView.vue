@@ -1,17 +1,17 @@
 
 <template>
-    <Completed/>
+    <PageCompleted/>
 </template>
   
   <script>
-    import Completed from '@/components/Completed.vue';
+    import PageCompleted from '@/components/PageCompleted.vue'
   
     export default {
         // eslint-disable-next-line vue/multi-word-component-names
         name: 'Completed',
     
         components: {
-            Completed,
+            PageCompleted,
         },
     }
 </script>

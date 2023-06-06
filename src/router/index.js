@@ -4,6 +4,7 @@ import HomeView from '../views/HomeView.vue'
 import CompletedView from '../views/CompletedView.vue'
 import LoginView from '../views/LoginView.vue'
 import NotFoundPageView from '../views/NotFoundPageView.vue'
+import AlboView from '../views/AlboView.vue'
 
 Vue.use(VueRouter)
 
@@ -16,7 +17,6 @@ const routes = [
     path: '/home',
     name: 'home',
     component: HomeView,
-    props: true
   },
   {
     path: '/login',
@@ -24,11 +24,15 @@ const routes = [
     component: LoginView
   },
   {
-    path: '/COMPLETED',
+    path: '/completati',
     name: 'completed',
     component: CompletedView,
-    props: true
 
+  },
+  {
+    path: '/albo',
+    name: 'albo',
+    component: AlboView,
   },
   {
     path: '/about',
