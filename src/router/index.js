@@ -11,43 +11,28 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    redirect: '/login',
-    meta: {
-      hideAsterisk: true
-    }
+    redirect: '/login'
   },
   {
     path: '/home',
     name: 'home',
-    component: HomeView,
-    meta: {
-      hideAsterisk: true
-    }
+    component: HomeView
   },
   {
     path: '/login',
     name: 'login',
-    component: LoginView,
-    meta: {
-      hideAsterisk: true
-    }
+    component: LoginView
   },
   {
     path: '/completati',
     name: 'completed',
-    component: CompletedView,
-    meta: {
-      hideAsterisk: true
-    }
+    component: CompletedView
 
   },
   {
     path: '/albo',
     name: 'albo',
-    component: AlboView,
-    meta: {
-      hideAsterisk: true
-    }
+    component: AlboView
   },
   {
     path: '/about',
