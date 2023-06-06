@@ -76,19 +76,19 @@ export default {
         if (path === "/login") {
           this.textLink = ""
           this.redirect = "/albo"
-          this.quoteLink = "quotes"
+          this.quoteLink = "albo"
         }
         else if (path === "/home") {
           this.textLink = "completati"
           this.redirect = "/albo"
-          this.quoteLink = "quotes"
+          this.quoteLink = "albo"
 
         }
 
         else if (path === "/completati") {
           this.textLink = "aggiungi"
           this.redirect = "/albo"
-          this.quoteLink = "quotes"
+          this.quoteLink = "albo"
         }
 
         else if (path === "/albo") {
@@ -104,7 +104,7 @@ export default {
         else if (path === "/about") {
           if(this.nameVal) {
             this.textLink = "aggiungi"
-            this.quoteLink = "quotes"
+            this.quoteLink = "albo"
             this.redirect = "/albo"
           } else {
             this.textLink = ""

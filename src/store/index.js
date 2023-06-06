@@ -14,7 +14,7 @@ export default new Vuex.Store({
         name: "Piero",
         task: "Comprare il latte",
         date: "15 May 16:45",
-        completed: false,
+        completed: true,
         editing: false
       },
       {
@@ -22,22 +22,22 @@ export default new Vuex.Store({
         name: "Piero",
         task: "Impastare il pane",
         date: "31 May 14:45",
-        completed: false,
+        completed: true,
         editing: false
       },
       {
         id: 2,
         name: "Simone",
         task: "Dipingere Casa",
-        date: "1 June 08:45",
-        completed: true,
+        date: "01 Jun 08:45",
+        completed: false,
         editing: false
       },
       {
         id: 3,
         name: "Michela",
         task: "Andare dal dottore",
-        date: "3 June 08:15",
+        date: "03 Jun 08:15",
         completed: false,
         editing: false
       },
@@ -45,7 +45,7 @@ export default new Vuex.Store({
         id: 4,
         name: "Michela",
         task: "Costruire una casetta per il cane",
-        date: "3 June 11:16",
+        date: "03 Jun 11:16",
         completed: true,
         editing: false
       },
@@ -61,14 +61,17 @@ export default new Vuex.Store({
     addTodoItem(state, item) {
       state.todoList.push(item)
     },
-    removeTodoItem(state, index) {
-      state.todoList.splice(index, 1)
+    removeTodoItem(state, itemId) {
+      const index = state.todoList.findIndex(item => item.id === itemId)
+      if (index !== -1)
+        state.todoList.splice(index, 1)
     },
-    updateTodoItem(state, { index, item }) {
-      state.todoList.splice(index, 1, item)
-    },
-    updateTodoItemProperty(state, { index, property, value }) {
-      state.todoList[index][property] = value;
+    updateTodoItemProperty(state, payload) {
+      const { itemId, property, value } = payload
+      const item = state.todoList.find(item => item.id === itemId)
+      if (item)
+        item[property] = value
+      
     },
   },
   actions: {
@@ -78,14 +81,11 @@ export default new Vuex.Store({
     addTodoItem({ commit }, item) {
       commit('addTodoItem', item)
     },
-    removeTodoItem({ commit }, index) {
-      commit('removeTodoItem', index)
+    removeTodoItem({ commit }, itemId) {
+      commit('removeTodoItem', itemId)
     },
-    updateTodoItem({ commit }, { index, item }) {
-      commit('updateTodoItem', { index, item })
-    },
-    updateTodoItemProperty({ commit }, { index, property, value }) {
-      commit('updateTodoItemProperty', { index, property, value });
+    updateTodoItemProperty({ commit }, payload) {
+      commit('updateTodoItemProperty', payload);
     },
   },
   modules: {

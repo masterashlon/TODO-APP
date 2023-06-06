@@ -1,7 +1,6 @@
 <template>
   <v-container
         fluid
-        style="align-items: center"
   >
     <v-row 
           align="center" 
@@ -13,10 +12,11 @@
         >
           <v-text-field
             v-model="taskVal" 
-            :label="nameVal ? 'Task' : 'Error Login'"
-            :disabled="!nameVal"
+            v-bind:label="nameVal ? 'Task' : 'Error Login'"
+            v-bind:disabled="!nameVal"
             hide-details="auto"
             v-on:keydown.enter="addToList"
+            autofocus
           ></v-text-field>
           <v-btn
             v-on:click="addToList"
@@ -25,119 +25,18 @@
         </v-btn>
         
       </div>
-        <v-row
-          class="mt-2 ml-1"
-          justify="start"
-          align="center"
-        >
-          <v-icon
-            size="40"
-          >
-            mdi-account-circle{{ nameVal ? "" : "-outline"}}
-          </v-icon>
-          <p
-            v-if="nameVal"
-            class="ml-1 text-h5 mt-4"
-          >
-            {{ nameVal }}
-            <a
-              class="ml-1 caption"
-              @click="logout"
-            >Log Out</a>
-          </p>
-          <p
-            v-else
-            class="ml-1 text-h6 mt-3"
-          >
-            <router-link to="/">Log In</router-link>
-          </p>
-
-        </v-row>
+      
+        <Account />
 
         <v-col 
           class="mt-6"
           v-if="todoList.length > 0"
         >
-          <v-card
-            v-bind:item="item"
-            v-for="(item, index) in reversedList"
+          <Task
+            v-bind:item="item"  
+            v-for="item in reversedList"
             v-bind:key="item.id"
-            class="c-flex justify-center align-center mb-10"
-            :class="{completed: item.completed}"
-            style="width: 100%;"
-            :disabled="!nameVal"
-          >
-            <v-row
-              class="ml-2 mb-1"
-              justify="start"
-              align="center"
-            >
-              <v-btn
-                style=""
-                class="shrink mr-4 mt-1"
-                v-on:click="changeIsCompleted(index, item)"
-                :class="{buttonCompleted: item.completed}"
-                >
-                <v-icon
-                  color="green lighten-2"
-                
-                >mdi-{{item.completed ? "check-bold" : "check-outline"}}</v-icon>
-              </v-btn>
-              <span
-                class="mt-1"
-                :class="{userColor: item.name === nameVal}"
-              >{{ item.name }}</span>
-            </v-row>
-            <v-row
-              class="ml-5 mb-2 mr-5 mt-4"
-              justify="start"
-              align="center"
-            >
-              <span
-                v-if="!item.editing"
-                class="text-body-1"
-                :class="{lineThrough: item.completed}"
-                spellcheck="false"
-              >{{ item.task }}</span>
-              <v-text-field
-                v-else
-                autofocus 
-                v-model="item.task" 
-                v-on:blur="updateEditableContent(item, index)"
-                v-on:keydown.enter="updateEditableContent(item, index)"
-              ></v-text-field>
-            </v-row>
-            <v-row
-              class="ml-2 mr-2 mt-2 mr-2"
-              justify="end"
-              align="center"
-            >
-              <span
-                class="mb-2 text-body-2"
-              >Created: {{ item.date }}</span>
-            </v-row>
-            <v-row
-              class="ml-2 mr-2 mt-2"
-              justify="start"
-              align="center"
-            >
-              <v-btn
-                class="mb-2 ml-2 mr-2"
-                v-on:click="toggleContentEditable(item, index)"
-              >
-              <v-icon>mdi-{{ !item.editing? "pen" : "check-underline-circle" }}</v-icon>
-              </v-btn>
-              <v-btn
-                class="mb-1"
-                v-on:click="deleteTask(index)"
-              >
-              <v-icon
-                color="red darken-4"
-              >mdi-delete</v-icon>
-              </v-btn>
-
-            </v-row>
-          </v-card>
+          />
         </v-col>
         <p 
           v-else
@@ -150,6 +49,8 @@
 </template>
 
 <script>
+  import Task from '@/components/Task.vue'
+  import Account from '@/components/Account.vue'
   import utils from '../utils.js'
   import { format } from 'date-fns'
   import { v4 as uuidv4 } from 'uuid'
@@ -157,9 +58,12 @@
   export default {
     name: 'TODOHome',
     mixins: [utils],
+    components: {
+    Account,
+    Task,
+},
     data: () => ({
       taskVal: "",
-      item: null,
       }),
 
       methods: {
@@ -183,8 +87,6 @@
             
         },
       },
-      beforeMount() {
-      },
     }
 </script>
 
@@ -200,7 +102,7 @@
     color: hsl(188, 100%, 39%);
   }
   .max-min-width-list {
-    max-width: 900px;
+    max-width: 550px;
     width: 100%;
     min-width: 330px;
   }
