@@ -11,28 +11,43 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    redirect: '/login'
+    redirect: '/login',
+    meta: {
+      hideAsterisk: true
+    }
   },
   {
     path: '/home',
     name: 'home',
     component: HomeView,
+    meta: {
+      hideAsterisk: true
+    }
   },
   {
     path: '/login',
     name: 'login',
-    component: LoginView
+    component: LoginView,
+    meta: {
+      hideAsterisk: true
+    }
   },
   {
     path: '/completati',
     name: 'completed',
     component: CompletedView,
+    meta: {
+      hideAsterisk: true
+    }
 
   },
   {
     path: '/albo',
     name: 'albo',
     component: AlboView,
+    meta: {
+      hideAsterisk: true
+    }
   },
   {
     path: '/about',
@@ -40,18 +55,24 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
+    meta: {
+      hideAsterisk: true
+    }
   },
   {
     path: '*',
     name: 'page404',
-    component: NotFoundPageView
+    component: NotFoundPageView,
+    meta: {
+      hideAsterisk: true
+    }
   }
 ]
 
 const router = new VueRouter({
+  mode:'history',
   routes,
-  history
 })
 
 export default router

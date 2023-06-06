@@ -3,8 +3,8 @@
     <v-card
         class="c-flex justify-center align-center mb-10"
         :class="{completed: item.completed}"
-        style="width: 100%;"
         :disabled="!nameVal"
+        :color="item.completed ? 'light-green lighten-4': 'yellow lighten-5' "
         >
         <v-row
             class="ml-2 mb-1"
@@ -15,10 +15,10 @@
             class="shrink mr-4 mt-1"
             v-on:click="changeIsCompleted(item)"
             :class="{buttonCompleted: item.completed}"
+            small
             >
             <v-icon
                 color="green lighten-2"
-            
             >mdi-check-{{item.completed ? "bold" : "outline"}}</v-icon>
             </v-btn>
             <span
@@ -55,19 +55,21 @@
             >Created: {{ item.date }}</span>
         </v-row>
         <v-row
-            class="ml-2 mr-2 mt-2"
+            class="ml-1 mt-2"
             justify="start"
             align="center"
         >
             <v-btn
-            class="mb-2 ml-2 mr-2"
+            class="mb-2 ml-1 mr-2"
             v-on:click="toggleContentEditable(item)"
+            small
             >
             <v-icon>mdi-{{ !item.editing? "pen" : "check-underline-circle" }}</v-icon>
             </v-btn>
             <v-btn
             class="mb-1"
             v-on:click="deleteTask(item.id)"
+            small
             >
             <v-icon
             color="red darken-4"
