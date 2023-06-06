@@ -73,7 +73,10 @@ export default {
     '$route.path': {
       handler(path) {
         // Change route links
-        if (path === "/login") {
+        if(path === "/TODO-APP") {
+          this.$router.push('/login')
+        }
+        else if (path === "/login") {
           this.textLink = ""
           this.redirect = "/albo"
           this.quoteLink = "albo"
