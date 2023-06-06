@@ -10,5 +10,5 @@ module.exports = defineConfig({
       title: 'TO-DO APP',
     }
   },
-  publicPath: process.env.NODE_ENV === 'production' ? '/TODO-APP/' : '/'
+  publicPath: process.env.NODE_ENV === "production" ? "/TODO-APP/" : "/"
 })
