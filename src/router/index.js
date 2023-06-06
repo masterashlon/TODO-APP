@@ -49,9 +49,6 @@ const routes = [
     path: '*',
     name: 'page404',
     component: NotFoundPageView,
-    meta: {
-      hideAsterisk: true
-    }
   }
 ]
 
