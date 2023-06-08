@@ -6,7 +6,11 @@
     <v-row 
         class="row justify-center align-center"
     >
-        <v-col cols="30" md="3">
+        <v-col 
+            cols="30" 
+            md="3"
+            v-if="isWorking"
+        >
                 <v-row
                     class="text-h6 justify-start mb-2 ml-1"
                 >   <span>DATA: </span>
@@ -66,7 +70,25 @@
                         </v-btn>
                     </v-img>
                 </v-row>
-            </v-col>
+        </v-col>
+        <v-col 
+            cols="30" 
+            md="3"
+            v-else
+        >   
+            <p>
+                There is a CORS Policy Problem that block the external resources.
+                <br />
+                Click on a button inside
+            <a
+                href="javascript:void(0)"
+                v-on:click="openCorsFix"
+            >
+                here
+            </a> 
+                and reload this page!
+            </p>
+        </v-col>
         </v-row>
     </v-container>
 </template>
@@ -81,7 +103,8 @@
         data: () => ({
             dataComic: {},
             numberComic: 100,
-            lastComic: null
+            lastComic: null,
+            isWorking: false
         }),
         methods: {
             changeComic(direction) {
@@ -116,9 +139,15 @@
                         img: data.img,
                         alt: data.alt
                     }
+                    this.isWorking = true
                 } catch(error) {
-                    console.error('Error fetching data:', error);
+                    this.isWorking = false
+                    console.log(this.isWorking)
+                    //console.error('Error data: ', error);
                 }
+            },
+            openCorsFix() {
+                window.open('https://cors-anywhere.herokuapp.com/http://xkcd.com/100/info.0.json', '_blank', 'width=300,height=300')
             }
         },
         mounted () {
@@ -128,20 +157,20 @@
 </script>
 
 <style scoped>
-.absolute-center {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    opacity: .7;
-}
-.left-pos {
-    left: 0;
-}
-.right-pos {
-    right: 0;
-}
+    .absolute-center {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: .7;
+    }
+    .left-pos {
+        left: 0;
+    }
+    .right-pos {
+        right: 0;
+    }
 
-.text-pos {
-    color: fuchsia;
-}
+    .text-pos {
+        color: fuchsia;
+    }
 </style>
